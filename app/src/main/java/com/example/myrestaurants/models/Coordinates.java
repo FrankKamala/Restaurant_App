@@ -1,11 +1,11 @@
 
-package com.example.myrestaurants;
+package com.example.myrestaurants.models;
 
 import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Center implements Serializable
+public class Coordinates implements Serializable
 {
 
     @SerializedName("latitude")
@@ -14,13 +14,13 @@ public class Center implements Serializable
     @SerializedName("longitude")
     @Expose
     private Double longitude;
-    private final static long serialVersionUID = 3072218454953256664L;
+    private final static long serialVersionUID = 7843934552207803709L;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public Center() {
+    public Coordinates() {
     }
 
     /**
@@ -28,7 +28,7 @@ public class Center implements Serializable
      * @param latitude
      * @param longitude
      */
-    public Center(Double latitude, Double longitude) {
+    public Coordinates(Double latitude, Double longitude) {
         super();
         this.latitude = latitude;
         this.longitude = longitude;

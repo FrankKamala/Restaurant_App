@@ -1,5 +1,5 @@
 
-package com.example.myrestaurants;
+package com.example.myrestaurants.models;
 
 import java.io.Serializable;
 import com.google.gson.annotations.Expose;

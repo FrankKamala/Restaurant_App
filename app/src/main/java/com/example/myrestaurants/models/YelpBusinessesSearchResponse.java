@@ -1,5 +1,5 @@
 
-package com.example.myrestaurants;
+package com.example.myrestaurants.models;
 
 import java.io.Serializable;
 import java.util.List;
