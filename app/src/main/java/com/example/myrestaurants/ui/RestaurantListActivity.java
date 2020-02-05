@@ -7,17 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myrestaurants.adapters.RestaurantListAdapter;
 import com.example.myrestaurants.models.Business;
-import com.example.myrestaurants.models.Category;
-import com.example.myrestaurants.models.MyRestaurantsAdapter;
 import com.example.myrestaurants.R;
 import com.example.myrestaurants.network.YelpApi;
 import com.example.myrestaurants.models.YelpBusinessesSearchResponse;
@@ -31,10 +25,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RestaurantsActivity extends AppCompatActivity {
+public class RestaurantListActivity extends AppCompatActivity {
    // private TextView mLocationView;
    // private ListView mListView;
-   public static final String TAG = RestaurantsActivity.class.getSimpleName();
+   public static final String TAG = RestaurantListActivity.class.getSimpleName();
 //   @BindView(R.id.locationTextView)TextView  mLocationView;
 //   @BindView(R.id.listView)ListView mListView;
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
@@ -59,7 +53,7 @@ public class RestaurantsActivity extends AppCompatActivity {
 //                String restaurant = ((TextView)view).getText().toString();
 //
 //
-//                Toast.makeText(RestaurantsActivity.this, restaurant, Toast.LENGTH_LONG).show();
+//                Toast.makeText(RestaurantListActivity.this, restaurant, Toast.LENGTH_LONG).show();
 //            }
 //        });
 
@@ -78,10 +72,10 @@ public class RestaurantsActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     restaurants = response.body().getBusinesses();
-                    mAdapter = new RestaurantListAdapter(RestaurantsActivity.this, restaurants);
+                    mAdapter = new RestaurantListAdapter(RestaurantListActivity.this, restaurants);
                     mRecyclerView.setAdapter(mAdapter);
                     RecyclerView.LayoutManager layoutManager =
-                            new LinearLayoutManager(RestaurantsActivity.this);
+                            new LinearLayoutManager(RestaurantListActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);
                     mRecyclerView.setHasFixedSize(true);
 //                    List<Business> restaurantsList = response.body().getBusinesses();
@@ -98,7 +92,7 @@ public class RestaurantsActivity extends AppCompatActivity {
 //                    }
 //
 //                    ArrayAdapter adapter
-//                            = new MyRestaurantsAdapter(RestaurantsActivity.this, android.R.layout.simple_list_item_1, restaurants, categories);
+//                            = new MyRestaurantsAdapter(RestaurantListActivity.this, android.R.layout.simple_list_item_1, restaurants, categories);
 //                    mListView.setAdapter(adapter);
 
                     showRestaurants();

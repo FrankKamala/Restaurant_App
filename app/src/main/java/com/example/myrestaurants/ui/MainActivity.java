@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                Toast.makeText(MainActivity.this,"Ah Taniua",Toast.LENGTH_LONG).show();
             String location = mLocationEditText.getText().toString();
 
-            Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
+            Intent intent = new Intent(MainActivity.this, RestaurantListActivity.class);
             intent.putExtra("location",location);
             startActivity(intent);
 //                String location = mLocationEditText.getText().toString();
