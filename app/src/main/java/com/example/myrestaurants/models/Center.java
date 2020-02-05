@@ -1,14 +1,15 @@
 
 package com.example.myrestaurants.models;
 
-import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
-@Parcel(Parcel.Serialization.BEAN)
+import java.io.Serializable;
 
+
+@Parcel(Parcel.Serialization.BEAN)
 public class Center implements Serializable
 {
 
