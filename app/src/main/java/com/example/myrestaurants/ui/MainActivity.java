@@ -1,12 +1,13 @@
 package com.example.myrestaurants.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myrestaurants.R;
 
@@ -17,6 +18,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String TAG = MainActivity.class.getSimpleName();
    // private Button mFindRestaurantButton;
     //private EditText mLocationEditText;
+
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+
     @BindView(R.id.button) Button mFindRestaurantButton;
     @BindView(R.id.locationEditText) EditText mLocationEditText;
    // @BindView(R.id.textView) TextView mTextView;
