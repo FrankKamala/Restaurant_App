@@ -11,6 +11,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myrestaurants.R;
+import com.example.myrestaurants.models.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,5 +55,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                String location = mLocationEditText.getText().toString();
 //                Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
         }
+
+    private void addToSharedPreferences(String location) {
+        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
+    }
     }
 
