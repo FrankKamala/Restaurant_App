@@ -3,6 +3,7 @@ package com.example.myrestaurants.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //        mFindRestaurantButton = (Button)findViewById(R.id.button);
 //        mLocationEditText =(EditText)findViewById(R.id.locationEditText);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
         ButterKnife.bind(this);
         // added
         mFindRestaurantButton.setOnClickListener(this);
