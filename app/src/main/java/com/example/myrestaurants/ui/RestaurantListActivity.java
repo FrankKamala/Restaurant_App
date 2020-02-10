@@ -1,20 +1,24 @@
 package com.example.myrestaurants.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myrestaurants.R;
 import com.example.myrestaurants.adapters.RestaurantListAdapter;
 import com.example.myrestaurants.models.Business;
-import com.example.myrestaurants.R;
-import com.example.myrestaurants.network.YelpApi;
+import com.example.myrestaurants.models.Constants;
 import com.example.myrestaurants.models.YelpBusinessesSearchResponse;
+import com.example.myrestaurants.network.YelpApi;
 import com.example.myrestaurants.network.YelpClient;
 
 import java.util.List;
@@ -26,6 +30,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RestaurantListActivity extends AppCompatActivity {
+    private SharedPreferences mSharedPreferences;
+    private String mRecentAddress;
    // private TextView mLocationView;
    // private ListView mListView;
    public static final String TAG = RestaurantListActivity.class.getSimpleName();
@@ -108,6 +114,10 @@ public class RestaurantListActivity extends AppCompatActivity {
             }
 
         });
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+        Log.d("Shared Pref Location", mRecentAddress);
     }
 
     private void showFailureMessage() {
