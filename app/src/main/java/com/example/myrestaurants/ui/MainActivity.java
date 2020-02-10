@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             Intent intent = new Intent(MainActivity.this, RestaurantListActivity.class);
             intent.putExtra("location",location);
+            addToSharedPreferences(location);
             startActivity(intent);
 //                String location = mLocationEditText.getText().toString();
 //                Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();

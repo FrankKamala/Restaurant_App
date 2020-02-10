@@ -50,6 +50,7 @@ public class RestaurantListActivity extends AppCompatActivity {
 
         ButterKnife.bind(this); // bind here
 
+
 //        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,restaurants);
 
 //
@@ -117,7 +118,13 @@ public class RestaurantListActivity extends AppCompatActivity {
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+
+
+
+
         Log.d("Shared Pref Location", mRecentAddress);
+
+
     }
 
     private void showFailureMessage() {
