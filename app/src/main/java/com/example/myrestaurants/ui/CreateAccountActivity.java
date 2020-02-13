@@ -1,8 +1,10 @@
-package com.example.myrestaurants;
+package com.example.myrestaurants.ui;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myrestaurants.R;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
