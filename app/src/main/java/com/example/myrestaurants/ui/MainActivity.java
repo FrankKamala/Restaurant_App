@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myrestaurants.R;
+import com.example.myrestaurants.SavedRestaurantsListActivity;
 import com.example.myrestaurants.models.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.button) Button mFindRestaurantButton;
     @BindView(R.id.locationEditText) EditText mLocationEditText;
    // @BindView(R.id.textView) TextView mTextView;
+   @BindView(R.id.savedRestaurantsButton) Button mSavedRestaurantsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +71,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
 
         mFindRestaurantButton.setOnClickListener(this);
+        mSavedRestaurantsButton.setOnClickListener(this);
 
     }
 
         @Override
         public void onClick(View v) {
+            if (v == mSavedRestaurantsButton) {
+                Intent intent = new Intent(MainActivity.this, SavedRestaurantsListActivity.class);
+                startActivity(intent);
+            }
 
             if(v == mFindRestaurantButton) {
                 String location = mLocationEditText.getText().toString();
