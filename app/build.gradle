@@ -33,6 +33,7 @@ android {
         it.buildConfigField 'String', 'YELP_API_KEY', YelpApiKey
     }
 
+
     buildTypes {
         release {
             minifyEnabled false

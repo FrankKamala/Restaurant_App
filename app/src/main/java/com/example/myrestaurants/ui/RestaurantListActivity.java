@@ -62,7 +62,7 @@ public class RestaurantListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
-        getRestaurant(location);
+
         //mLocationView.setText("Here are all the restaurants near: " + location);
 
         YelpApi client = YelpClient.getClient();
