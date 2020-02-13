@@ -1,18 +1,26 @@
 package com.example.myrestaurants.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myrestaurants.R;
 import com.example.myrestaurants.adapters.RestaurantListAdapter;
 import com.example.myrestaurants.models.Business;
+import com.example.myrestaurants.models.Constants;
 import com.example.myrestaurants.models.YelpBusinessesSearchResponse;
 import com.example.myrestaurants.network.YelpApi;
 import com.example.myrestaurants.network.YelpClient;
@@ -26,10 +34,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RestaurantListActivity extends AppCompatActivity {
-   // private SharedPreferences mSharedPreferences;
-    //private String mRecentAddress;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private String mRecentAddress;
    // private TextView mLocationView;
    // private ListView mListView;
+
+
+
    public static final String TAG = RestaurantListActivity.class.getSimpleName();
 //   @BindView(R.id.locationTextView)TextView  mLocationView;
 //   @BindView(R.id.listView)ListView mListView;
@@ -112,8 +124,8 @@ public class RestaurantListActivity extends AppCompatActivity {
 
         });
 
-       // mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-       // mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+       mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
 
 
 
@@ -121,6 +133,42 @@ public class RestaurantListActivity extends AppCompatActivity {
        // Log.d("Shared Pref Location", mRecentAddress);
 
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                addToSharedPreferences(query);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+    private void addToSharedPreferences(String location) {
+        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
     }
 
     private void showFailureMessage() {
