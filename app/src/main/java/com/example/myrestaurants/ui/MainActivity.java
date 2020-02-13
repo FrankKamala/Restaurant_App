@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myrestaurants.R;
@@ -23,11 +22,10 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     public static final String TAG = MainActivity.class.getSimpleName();
-   // private Button mFindRestaurantButton;
-    //private EditText mLocationEditText;
 
     //    private SharedPreferences mSharedPreferences;
 //    private SharedPreferences.Editor mEditor;
+    private ValueEventListener mSearchedLocationReferenceListener;
 
     private DatabaseReference mSearchedLocationReference;
 
@@ -42,18 +40,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .getInstance()
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_SEARCHED_LOCATION);
-
-
 //        mFindRestaurantButton = (Button)findViewById(R.id.button);
 //        mLocationEditText =(EditText)findViewById(R.id.locationEditText);
        // mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //mEditor = mSharedPreferences.edit();
 
         // added
-        mFindRestaurantButton.setOnClickListener(this);
-        mSearchedLocationReference.addValueEventListener(new ValueEventListener() {
+        mSearchedLocationReferenceListener = mSearchedLocationReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange( DataSnapshot dataSnapshot) {
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
                     String location = locationSnapshot.getValue().toString();
                     Log.d("Locations updated", "location: " + location); //log
@@ -62,13 +57,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled( DatabaseError databaseError) {
+
 
             }
         });
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        mFindRestaurantButton.setOnClickListener(this);
+
     }
 
         @Override
@@ -89,11 +90,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
+
+
     public void saveLocationToFirebase(String location) {
         mSearchedLocationReference.push().setValue(location);
     }
 
-  //  private void addToSharedPreferences(String location) {
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSearchedLocationReference.removeEventListener(mSearchedLocationReferenceListener);
+    }
+
+
+    //  private void addToSharedPreferences(String location) {
       //  mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
    // }
 
