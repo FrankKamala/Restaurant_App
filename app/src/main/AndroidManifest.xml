@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.CreateAccountActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".ui.CreateAccountActivity" />
         <activity android:name=".SavedRestaurantsListActivity" />
         <activity android:name=".ui.RestaurantDetailActivity" />
         <activity android:name=".ui.RestaurantListActivity">
