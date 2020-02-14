@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myrestaurants.adapters.FirebaseRestaurantViewHolder;
+import com.example.myrestaurants.models.Business;
 import com.example.myrestaurants.models.Constants;
-import com.example.myrestaurants.models.Restaurant;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 
 public class SavedRestaurantsListActivity extends AppCompatActivity {
     private DatabaseReference mRestaurantReference;
-    private FirebaseRecyclerAdapter<Restaurant, FirebaseRestaurantViewHolder> mFirebaseAdapter;
+    private FirebaseRecyclerAdapter<Business, FirebaseRestaurantViewHolder> mFirebaseAdapter;
 
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
 
@@ -39,14 +39,14 @@ public class SavedRestaurantsListActivity extends AppCompatActivity {
     }
 
     private void setUpFirebaseAdapter(){
-        FirebaseRecyclerOptions<Restaurant> options =
-                new FirebaseRecyclerOptions.Builder<Restaurant>()
-                        .setQuery(mRestaurantReference, Restaurant.class)
+        FirebaseRecyclerOptions<Business> options =
+                new FirebaseRecyclerOptions.Builder<Business>()
+                        .setQuery(mRestaurantReference, Business.class)
                         .build();
 
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Restaurant, FirebaseRestaurantViewHolder>(options) {
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Business, FirebaseRestaurantViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseRestaurantViewHolder firebaseRestaurantViewHolder, int position, @NonNull Restaurant restaurant) {
+            protected void onBindViewHolder(@NonNull FirebaseRestaurantViewHolder firebaseRestaurantViewHolder, int position, @NonNull Business restaurant) {
                 firebaseRestaurantViewHolder.bindRestaurant(restaurant);
             }
 
